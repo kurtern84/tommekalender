@@ -1,0 +1,9 @@
+{
+  "domain": "tommekalender",
+  "name": "Tommekalender",
+  "version": "1.0.0",
+  "documentation": "https://github.com/kurtern84/tommekalender",
+  "dependencies": [],
+  "codeowners": ["@kurtern84"],
+  "requirements": ["requests", "beautifulsoup4"]
+}
