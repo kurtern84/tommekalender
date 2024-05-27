@@ -15,7 +15,7 @@ Tommekalender is a Home Assistant plugin that fetches and displays waste collect
  - Copy the met_alerts directory to your custom components directory:
 
 ```
-cp -r met_alerts /config/custom_components/
+cp -r tommekalender /config/custom_components/
 
 ```
 3. Install Dependencies
