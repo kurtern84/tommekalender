@@ -3,6 +3,7 @@ from datetime import timedelta
 import requests
 from bs4 import BeautifulSoup
 import logging
+import hashlib
 
 from homeassistant.helpers.entity import Entity
 
@@ -31,6 +32,7 @@ class TommekalenderSensor(Entity):
         self._address = address
         self._waste_type = waste_type
         self._icon = "mdi:recycle"
+        self._unique_id = self._generate_unique_id()
         self.update()
 
     @property
@@ -47,6 +49,11 @@ class TommekalenderSensor(Entity):
     def icon(self):
         """Return the icon of the sensor."""
         return self._icon
+
+    @property
+    def unique_id(self):
+        """Return the unique ID of the sensor."""
+        return self._unique_id
 
     def update(self):
         """Fetch new state data for the sensor."""
@@ -65,3 +72,8 @@ class TommekalenderSensor(Entity):
         except Exception as e:
             _LOGGER.error(f"Error fetching Tommekalender data: {e}")
             self._state = "Error"
+
+    def _generate_unique_id(self):
+        """Generate a unique ID for the sensor based on address and waste type."""
+        unique_string = f"{self._address}_{self._waste_type}"
+        return hashlib.md5(unique_string.encode()).hexdigest()
